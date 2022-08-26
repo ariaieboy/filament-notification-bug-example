@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All" type="PestRunConfigurationType">
+    <CommandLine>
+      <PhpTestInterpreterSettings>
+        <option name="interpreterName" value="laravel.test" />
+      </PhpTestInterpreterSettings>
+    </CommandLine>
+    <option name="pestRunnerSettings">
+      <PestRunner method="" scope="ConfigurationFile" options="-p" />
+    </option>
+    <option name="runnerSettings">
+      <PhpTestRunnerSettings method="" scope="ConfigurationFile" options="-p" />
+    </option>
+    <method v="2" />
+  </configuration>
+</component>

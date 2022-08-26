@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+    * {
+        direction: rtl !important;
+    }
+
+    @font-face {
+        font-family: 'dana';
+        src: url("@/../fonts/DanaVF.woff") format("woff-variations"),
+        url("@/../fonts/DanaVF.woff2") format("woff2-variations");
+        font-display: fallback;
+    }
+}
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .container {
+        @apply px-4 sm:px-6 md:px-8
+    }
+
+    .font-hairline {
+        font-variation-settings: 'wght' 10;
+        font-weight: 10;
+    }
+
+    .font-thin {
+        font-variation-settings: 'wght' 100;
+        font-weight: 100;
+    }
+
+    .font-extralight {
+        font-variation-settings: 'wght' 200;
+        font-weight: 200;
+    }
+
+    .font-light {
+        font-weight: 300;
+        font-variation-settings: 'wght' 300;
+    }
+
+    .font-normal {
+        font-weight: 400;
+        font-variation-settings: 'wght' 400;
+    }
+
+    .font-medium {
+        font-weight: 500;
+        font-variation-settings: 'wght' 500;
+    }
+
+    .font-semibold {
+        font-weight: 600;
+        font-variation-settings: 'wght' 600;
+    }
+
+    .font-bold {
+        font-weight: 700;
+        font-variation-settings: 'wght' 700;
+    }
+
+    .font-extrabold {
+        font-weight: 800;
+        font-variation-settings: 'wght' 800;
+    }
+
+    .font-black {
+        font-weight: 900;
+        font-variation-settings: 'wght' 900;
+    }
+
+    .font-extrablack {
+        font-weight: 930;
+        font-variation-settings: 'wght' 930;
+    }
+
+    .font-heavy {
+        font-weight: 960;
+        font-variation-settings: 'wght' 960;
+    }
+
+    .font-fat {
+        font-weight: 990;
+        font-variation-settings: 'wght' 990;
+    }
+}
+:root,
+[data-theme] {
+    background-color: hsla(var(--b3) / var(--tw-bg-opacity, 1));
+    color: hsla(var(--bc) / var(--tw-text-opacity, 1));
+}
+
+.clockwork-toolbar, .clockwork-toolbar * {
+    direction: ltr !important;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-gray-300 dark:bg-gray-700 shadow;
+}
+
+::-webkit-scrollbar {
+    @apply bg-base-100 w-2;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-gray-500 dark:bg-gray-900 rounded w-2;
+}

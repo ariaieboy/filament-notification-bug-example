@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Statistic">
+    <option name="excludedDirectories">
+      <list>
+        <option value="$PROJECT_DIR$/.idea" />
+        <option value="$PROJECT_DIR$/bootstrap" />
+        <option value="$PROJECT_DIR$/config" />
+        <option value="$PROJECT_DIR$/coverage" />
+        <option value="$PROJECT_DIR$/node_modules" />
+        <option value="$PROJECT_DIR$/public" />
+        <option value="$PROJECT_DIR$/storage" />
+        <option value="$PROJECT_DIR$/vendor" />
+      </list>
+    </option>
+  </component>
+</project>

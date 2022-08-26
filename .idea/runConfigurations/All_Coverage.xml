@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All Coverage" type="PestRunConfigurationType">
+    <option name="pestRunnerSettings">
+      <PestRunner method="" scope="ConfigurationFile" options="--parallel --coverage --coverage-html coverage" coverage_engine="PCov" />
+    </option>
+    <method v="2" />
+  </configuration>
+</component>

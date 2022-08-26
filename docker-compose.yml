@@ -1,0 +1,89 @@
+# For more information: https://laravel.com/docs/sail
+version: '3'
+services:
+  laravel.test:
+    build:
+      context: ./resources/docker
+      dockerfile: Dockerfile
+      args:
+        WWWGROUP: '${WWWGROUP}'
+    image: ariaieboy/rakolo
+    ports:
+      - '${APP_PORT:-80}:80'
+      - 5173:5173
+    environment:
+      WWWUSER: '${WWWUSER}'
+      LARAVEL_SAIL: 1
+      XDEBUG_MODE: 'develop,debug,coverage'
+    volumes:
+      - '.:/var/www/html'
+    networks:
+    - sail
+    depends_on:
+        - pgsql
+        - pgsqltest
+  pgsql:
+      image: postgres:15beta3-alpine
+      ports:
+          - '${FORWARD_DB_PORT:-5432}:5432'
+      environment:
+          PGPASSWORD: '${DB_PASSWORD:-secret}'
+          POSTGRES_DB: '${DB_DATABASE}'
+          POSTGRES_USER: '${DB_USERNAME}'
+          POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+      volumes:
+          - 'sailpgsql:/var/lib/postgresql/data'
+          - ./backup:/backup
+      networks:
+          - sail
+      healthcheck:
+          test: ["CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}"]
+          retries: 3
+          timeout: 5s
+  pgsqltest:
+      image: postgres:15beta2-alpine
+      ports:
+          - '5454:5432'
+      environment:
+          PGPASSWORD: '${DB_PASSWORD:-secret}'
+          POSTGRES_DB: '${DB_DATABASE}'
+          POSTGRES_USER: '${DB_USERNAME}'
+          POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+      networks:
+          - sail
+  pgweb:
+    image: dpage/pgadmin4
+    ports:
+      - "8081:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    environment:  # my database container is called pgsql, not db
+      PGADMIN_DEFAULT_EMAIL: 'smr.seddighy@gmail.com'
+      PGADMIN_DEFAULT_PASSWORD: '09158585889'
+      MAX_LOGIN_ATTEMPTS: 1000000
+    depends_on:
+      - pgsql  # my database container is called pgsql, not db
+    networks:
+        - sail
+  redis:
+      image: 'redis:alpine'
+      ports:
+          - '${FORWARD_REDIS_PORT:-6379}:6379'
+      volumes:
+          - 'sail-redis:/data'
+      networks:
+          - sail
+      healthcheck:
+          test: ["CMD", "redis-cli", "ping"]
+          retries: 3
+          timeout: 5s
+networks:
+  sail:
+    driver: bridge
+volumes:
+    sailpgsql:
+        driver: local
+    sail-redis:
+        driver: local
+    pgadmin-data:
+        driver: local
